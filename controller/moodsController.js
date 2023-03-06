@@ -6,8 +6,6 @@ var router = express.Router();
 
 // Require the mongoose module
 const mongoose = require("mongoose");
-
-// May need to double check if it's "moods" per my MongoDB Atlas naming, or "Moods" for another naming convention/JS reason
 const Moods = mongoose.model("Moods");
 
 // Create an API endpoint ("/list")
@@ -22,7 +20,7 @@ router.get("/list", (req, res) => {
     } else {
       // Show a specific error message if this function can't get/find the moods collection
       console.log(
-        "Error in retrieval moodsController express get request find and send list of Moods : " +
+        "Error in retrieval moodsController express get request find and send list of moods : " +
           err
       );
     }
