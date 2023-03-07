@@ -48,6 +48,7 @@ router.post("/", (req, res) => {
   // If the body ID does not exist or is blank, insert or create the record
   if (!req.body_id || req.body._id == "") {
     console.log("insert");
+    console.log(req.body);
     // Call custom function from below
     insertRecord(req, res);
     // Otherwise update the existing record
@@ -67,7 +68,8 @@ async function insertRecord(req, res) {
       notes: req.body.notes,
     });
     const doc = await moodsObj.save();
-    res.redirect("moods/list");
+    // This is the endpoint the that the browser 'cannot GET'
+    // res.redirect("/");
   } catch (err) {
     console.log(
       "Error during insert insertRecord function in moodsController : " + err
@@ -100,7 +102,7 @@ function updateRecord(req, res) {
   Moods.findOneAndUpdate({ _id: req.body._id }, req.body, (err, doc) => {
     // If no error in updating this object, send the response object to moods/list endpoint
     if (!err) {
-      res.redirect("/list");
+      res.redirect("moods/list");
       // Show this message is there is an error in updating this mood object
     } else {
       console.log(
