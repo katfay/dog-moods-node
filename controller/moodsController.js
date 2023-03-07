@@ -10,7 +10,7 @@ const Moods = mongoose.model("Moods");
 
 // Create an API endpoint ("/list")
 // Get the list of moods (the objects/data)
-// This URI should match the endpoint in the fetch function in the frontend JS file
+// This URI should match the last bit e.g. "/list" from "expenses/list" of the endpoint in the fetch function in the frontend JS file
 router.get("/list", (req, res) => {
   // Find the list of moods from (?the endpoint/the database collection)
   Moods.find((err, docs) => {
@@ -58,31 +58,49 @@ router.post("/", (req, res) => {
   }
 });
 
-// Custom function to insert (or create) a mood object
-function insertRecord(req, res) {
-  var moodsObj = new Moods();
-  moodsObj.mood = req.body.mood;
-  moodsObj.date = req.body.date;
-  moodsObj.notes = req.body.notes;
-  moodsObj.save((err, doc) => {
-    // If no error in inserting or creating this object, send the response object to moods/list endpoint
-    if (!err) {
-      res.redirect("moods/list");
-      // Show this message is there is an error in creating this mood object
-    } else {
-      console.log(
-        "Error during insert insertRecord function in moodsController : " + err
-      );
-    }
-  });
+// Custom function to insert (or create) a mood object (with promises)
+async function insertRecord(req, res) {
+  try {
+    const moodsObj = new Moods({
+      mood: req.body.mood,
+      date: req.body.date,
+      notes: req.body.notes,
+    });
+    const doc = await moodsObj.save();
+    res.redirect("moods/list");
+  } catch (err) {
+    console.log(
+      "Error during insert insertRecord function in moodsController : " + err
+    );
+  }
 }
+
+// Custom (callback) function to insert (or create) a mood object
+
+// function insertRecord(req, res) {
+//   var moodsObj = new Moods();
+//   moodsObj.mood = req.body.mood;
+//   moodsObj.date = req.body.date;
+//   moodsObj.notes = req.body.notes;
+//   moodsObj.save((err, doc) => {
+//     // If no error in inserting or creating this object, send the response object to moods/list endpoint
+//     if (!err) {
+//       res.redirect("moods/list");
+//       // Show this message is there is an error in creating this mood object
+//     } else {
+//       console.log(
+//         "Error during insert insertRecord function in moodsController : " + err
+//       );
+//     }
+//   });
+// }
 
 // Custom function to update a mood object
 function updateRecord(req, res) {
   Moods.findOneAndUpdate({ _id: req.body._id }, req.body, (err, doc) => {
     // If no error in updating this object, send the response object to moods/list endpoint
     if (!err) {
-      res.redirect("moods/list");
+      res.redirect("/list");
       // Show this message is there is an error in updating this mood object
     } else {
       console.log(
