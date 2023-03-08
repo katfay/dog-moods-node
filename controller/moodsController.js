@@ -47,9 +47,10 @@ router.get("/:id", (req, res) => {
 router.post("/", (req, res) => {
   // If the body ID does not exist or is blank, insert or create the record
   if (!req.body_id || req.body._id == "") {
-    console.log("insert");
+    console.log("insert req body to terminal");
     console.log(req.body);
     // Call custom function from below
+    console.log("call insertRecord function");
     insertRecord(req, res);
     // Otherwise update the existing record
   } else {
@@ -97,7 +98,8 @@ async function insertRecord(req, res) {
   moodsObj.mood = req.body.mood;
   moodsObj.date = req.body.date;
   moodsObj.notes = req.body.notes;
-  // moodsObj.moodType = req.body.
+  moodsObj.moodName = req.body.moodName;
+  moodsObj.category = req.body.category;
   moodsObj.save((err, doc) => {
     if (!err) {
       // This is the endpoint the that the browser 'cannot GET'
