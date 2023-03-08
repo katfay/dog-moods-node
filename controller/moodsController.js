@@ -62,38 +62,6 @@ router.post("/", (req, res) => {
 
 // Custom function to insert (or create) a mood object (with promises)
 async function insertRecord(req, res) {
-  // function getMoodName() {
-  //   const moodCheckboxFields = [
-  //     "sulkyName",
-  //     "delightedName",
-  //     "indignantName",
-  //     "cuddlyName",
-  //     "outragedName",
-  //     "proudName",
-  //     "afraidName",
-  //     "joyousName",
-  //     "vigilantName",
-  //     "grumblyName",
-  //     "flatName",
-  //     "melodramaticName",
-  //     "protectiveName",
-  //     "huffyName",
-  //     "contendedName",
-  //   ];
-  //   const moodCheckboxValues = {};
-  //   moodCheckboxFields.forEach((fieldName) => {
-  //     if (req.body[fieldName]) {
-  //       moodCheckboxValues[fieldName.replace("name", "value")] = true;
-  //     }
-  //   });
-  //   const checkboxValues = {};
-  //   moodCheckboxFields.forEach((fieldName) => {
-  //     if (req.body[fieldName]) {
-  //       checkboxValues[fieldName.replace("name", "value")] = true;
-  //     }
-  //   });
-  // }
-  // getMoodName(req);
   var moodsObj = new Moods();
   moodsObj.mood = req.body.mood;
   moodsObj.date = req.body.date;
@@ -104,6 +72,7 @@ async function insertRecord(req, res) {
     if (!err) {
       // This is the endpoint the that the browser 'cannot GET'
       // res.redirect("/moods/list");
+      res.redirect(req.header("Referer") || "/");
     } else {
       console.log(
         "Error during insert insertRecord function in moodsController : " + err
