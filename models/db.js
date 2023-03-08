@@ -13,11 +13,11 @@ mongoose
     }
   )
   .then(() => {
-    console.log("Connected to database!");
+    console.log("Connected to database on dev-test branch!");
     // other code that depends on the database connection
   })
   .catch((err) => {
-    console.error("Error connecting to database", err);
+    console.error("Error connecting to database on dev-test branch", err);
   });
 
 require("./moods.model");

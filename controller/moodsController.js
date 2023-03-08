@@ -62,7 +62,40 @@ router.post("/", (req, res) => {
 // Custom function to insert (or create) a mood object (with promises)
 async function insertRecord(req, res) {
   try {
+    // function getMoodName() {
+    //   const moodCheckboxFields = [
+    //     "sulkyName",
+    //     "delightedName",
+    //     "indignantName",
+    //     "cuddlyName",
+    //     "outragedName",
+    //     "proudName",
+    //     "afraidName",
+    //     "joyousName",
+    //     "vigilantName",
+    //     "grumblyName",
+    //     "flatName",
+    //     "melodramaticName",
+    //     "protectiveName",
+    //     "huffyName",
+    //     "contendedName",
+    //   ];
+    //   const moodCheckboxValues = {};
+    //   moodCheckboxFields.forEach((fieldName) => {
+    //     if (req.body[fieldName]) {
+    //       moodCheckboxValues[fieldName.replace("name", "value")] = true;
+    //     }
+    //   });
+    //   const checkboxValues = {};
+    //   moodCheckboxFields.forEach((fieldName) => {
+    //     if (req.body[fieldName]) {
+    //       checkboxValues[fieldName.replace("name", "value")] = true;
+    //     }
+    //   });
+    // }
+    // getMoodName(req);
     const moodsObj = new Moods({
+      what: req.body.mood,
       mood: req.body.mood,
       date: req.body.date,
       notes: req.body.notes,
