@@ -95,8 +95,7 @@ async function insertRecord(req, res) {
     // }
     // getMoodName(req);
     const moodsObj = new Moods({
-      what: req.body.mood,
-      mood: req.body.mood,
+      // mood: req.body.mood,
       date: req.body.date,
       notes: req.body.notes,
     });

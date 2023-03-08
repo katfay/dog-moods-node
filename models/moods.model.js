@@ -8,6 +8,7 @@ var moodsSchema = new mongoose.Schema(
     whatCheckbox: {
       type: String,
       default: false,
+      required: "This field is required",
     },
     sulkyName: {
       type: Boolean,
