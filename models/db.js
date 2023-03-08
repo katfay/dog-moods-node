@@ -21,5 +21,3 @@ mongoose
   });
 
 require("./moods.model");
-
-// This is working version Duncan Apple (in combo with the frontend)
